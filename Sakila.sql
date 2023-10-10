@@ -40,3 +40,28 @@ select * from film;
 SELECT f.title Título, f.description Descripción, f.release_year 'Año de Estreno', f.rating Calificación, f.special_features 'Función Especial'
 FROM film f JOIN film_actor fa ON(f.film_id = fa.film_id)
 WHERE f.rating = 'G' AND f.special_features LIKE('%Behind the Scenes') AND fa.actor_id = 15;
+
+/* 6. ¿Qué consulta harías para obtener todos los actores que se unieron en el film_id = 369? Su consulta debe devolver film_id, title, actor_id y actor_name. */
+
+SELECT fa.film_id 'ID Película', f.title Título, a.actor_id 'ID Actor', CONCAT(a.first_name, ' ', a.last_name) 'Nombre Actor' 
+FROM actor a JOIN film_actor fa ON(fa.actor_id = a.actor_id)
+			 JOIN film f ON(fa.film_id = f.film_id)
+WHERE fa.film_id = 369;
+
+/* 7. ¿Qué consulta harías para obtener todas las películas dramáticas con una tarifa de alquiler de 2.99? Su consulta debe devolver el título de la película,
+la descripción, el año de estreno, la calificación, las características especiales y el género (categoría). */
+
+SELECT f.title Título, f.description Descripción, f.release_year 'Año Estreno', f.rating Calificación, f.special_features 'Características Especiales', c.name 'Género(Categoría)', f.rental_rate 'Tarifa Alquiler'
+FROM film f JOIN film_category fc ON(f.film_id = fc.film_id)
+			JOIN category c ON(fc.category_id = c.category_id)
+WHERE f.rental_rate = 2.99 AND c.name = 'Drama';
+
+/* 8. ¿Qué consulta harías para obtener todas las películas de acción a las que se une SANDRA KILMER? Su consulta debe devolver el título de la película,
+la descripción, el año de estreno, la calificación, las características especiales, el género (categoría) y el nombre y apellido del actor. */
+
+SELECT f.title Título, f.description Descripción, f.release_year 'Año Estreno', f.rating Calificación, f.special_features 'Características Especiales', c.name 'Género(Categoría)', CONCAT(a.first_name, ' ', a.last_name) 'Nombre Actor'
+FROM film f JOIN film_actor fa ON(f.film_id = fa.film_id)
+			JOIN actor a ON(fa.actor_id = a.actor_id)
+            JOIN film_category fc ON(f.film_id = fc.film_id)
+			JOIN category c ON(fc.category_id = c.category_id)
+WHERE c.name = 'Action' AND a.actor_id = 23;
