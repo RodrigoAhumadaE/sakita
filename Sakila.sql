@@ -9,7 +9,6 @@ WHERE ci.city_id = 312;
 
 /* 2. ¿Qué consulta harías para obtener todas las películas de comedia? Su consulta debe devolver el título de la película, la descripción, el año de estreno,
 la calificación, las características especiales y el género (categoría). */
-SELECT * FROM category;
 
 SELECT f.film_id 'ID Película', f.title Título, f.description Descripción, f.release_year 'Año de Estreno', f.rating Calificación, f.special_features 'Caracteristicas especiales', c.name 'Genero'
 FROM film f JOIN film_category fc ON(f.film_id = fc.film_id)
@@ -36,7 +35,6 @@ WHERE st.store_id = 1 AND ad.city_id IN(1, 42, 312, 459);
 actor_id = 15? Su consulta debe devolver el título de la película, la descripción, el año de lanzamiento, la calificación y la función especial.
 Sugerencia: puede usar la función LIKE para obtener la parte 'detrás de escena'. */
 
-select * from film;
 SELECT f.title Título, f.description Descripción, f.release_year 'Año de Estreno', f.rating Calificación, f.special_features 'Función Especial'
 FROM film f JOIN film_actor fa ON(f.film_id = fa.film_id)
 WHERE f.rating = 'G' AND f.special_features LIKE('%Behind the Scenes') AND fa.actor_id = 15;
